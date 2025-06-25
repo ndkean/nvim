@@ -103,6 +103,10 @@ return {
         --  the definition of its *type*, not where it was *defined*.
         map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
+        map('gF', function()
+          vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
+        end, 'Open [F]loating Diagnostic')
+
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         ---@param client vim.lsp.Client
         ---@param method vim.lsp.protocol.Method
@@ -266,3 +270,5 @@ return {
     }
   end,
 }
+
+-- vim: ts=2 sts=2 sw=2 et
