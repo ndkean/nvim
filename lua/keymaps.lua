@@ -25,3 +25,29 @@ vim.keymap.set('v', '<', '<gv', { desc = 'Uindent line' })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+vim.keymap.set('n', '<C-c>', function()
+  vim.ui.input({ prompt = 'Compile command: ', default = vim.g.Compile_command }, function(input)
+    if not input then
+      return
+    end
+
+    vim.g.Compile_command = input
+
+    local cmd = vim.split(vim.g.Compile_command, ' ')
+    vim.system(cmd, { text = true }, function(out)
+      local msg = ''
+      if out.stderr ~= '' then
+        msg = msg .. out.stderr .. '\n'
+      end
+
+      if out.code == 0 then
+        print(msg .. 'Compilation successful')
+      else
+        print(msg .. 'Compilation failed')
+      end
+    end)
+  end)
+end, { desc = '[C]ompile' })
+
+-- vim: ts=2 sts=2 sw=2 et
