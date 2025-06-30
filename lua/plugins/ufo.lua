@@ -5,7 +5,7 @@ return {
   config = function()
     require('ufo').setup {
       provider_selector = function(bufnr, filetype, buftype)
-        return 'indent'
+        return 'treesitter'
       end,
     }
     vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
