@@ -21,10 +21,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<leader>tn', function()
   vim.o.number = not vim.o.number
-end, { desc = '[T]oggle line number' })
+end, { desc = '[T]oggle line [n]umber' })
 vim.keymap.set('n', '<leader>tr', function()
   vim.o.relativenumber = not vim.o.relativenumber
-end, { desc = '[T]oggle line number' })
+end, { desc = '[T]oggle [r]elative number' })
 
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Indent line' })
