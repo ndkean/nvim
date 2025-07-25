@@ -44,6 +44,10 @@ vim.keymap.set('n', '<C-c>', function()
         msg = msg .. out.stderr .. '\n'
       end
 
+      if out.stdout ~= '' then
+        msg = msg .. out.stdout .. '\n'
+      end
+
       if out.code == 0 then
         print(msg .. 'Compilation successful')
       else
