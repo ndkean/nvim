@@ -8,3 +8,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*.lua',
+  callback = function()
+    vim.o.expandtab = true
+    vim.o.tabstop = 2
+    vim.o.shiftwidth = 2
+  end,
+})
