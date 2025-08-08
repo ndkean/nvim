@@ -63,5 +63,3 @@ vim.keymap.set('n', '<C-c>', function()
     end)
   end)
 end, { desc = '[C]ompile' })
-
--- vim: ts=2 sts=2 sw=2 et
