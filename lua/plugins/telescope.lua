@@ -23,6 +23,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
   },
   config = function()
     require('telescope').setup {
+      defaults = {
+        mappings = {
+          -- TODO: should i add trouble as a dependency
+          --       if so do can i keep it in its own file
+          i = { ['<C-t>'] = require('trouble.sources.telescope').open },
+          n = { ['<C-t>'] = require('trouble.sources.telescope').open },
+        },
+      },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
