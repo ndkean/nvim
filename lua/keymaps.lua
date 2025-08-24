@@ -7,10 +7,6 @@ end, { silent = true })
 
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
@@ -24,15 +20,28 @@ vim.keymap.set('n', '<leader>tr', function()
 end, { desc = '[T]oggle [r]elative number' })
 
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
+
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without yanking' })
+
+vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete without yanking' })
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete without yanking' })
+
 vim.keymap.set('v', '>', '>gv', { desc = 'Indent line' })
-vim.keymap.set('v', '<', '<gv', { desc = 'Uindent line' })
+vim.keymap.set('v', '<', '<gv', { desc = 'Unindent line' })
 
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+vim.keymap.set('n', '<A-k>', '<C-Y>k', { desc = 'Scroll up one line' })
+vim.keymap.set('n', '<A-j>', '<C-E>j', { desc = 'Scroll down one line' })
 
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+
+-- TODO: less scuffed compile:
+-- - [ ] don't try to compile with no command
+-- - [ ] turn this into a user command
+-- - [ ] generate a location list (with trouble.nvim?) for when comp. fails
+-- - [ ] only print one line at a time
+-- - [ ] print compilation started... -> compilation successful/failed
+-- - [ ] detect warns/errors
 vim.keymap.set('n', '<C-c>', function()
   vim.ui.input({ prompt = 'Compile command: ', default = vim.g.Compile_command }, function(input)
     if not input then
@@ -60,3 +69,9 @@ vim.keymap.set('n', '<C-c>', function()
     end)
   end)
 end, { desc = '[C]ompile' })
+
+-- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
+-- vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
+-- vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
+-- vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
+-- vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
