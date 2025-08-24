@@ -17,3 +17,56 @@ vim.api.nvim_create_autocmd('BufEnter', {
     vim.o.shiftwidth = 2
   end,
 })
+
+local function file_exists(name)
+  local f = io.open(name, 'r')
+  if f ~= nil then
+    io.close(f)
+    return true
+  end
+  return false
+end
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = { '*.c', '*.cpp', '*.h', '*.hpp' },
+  callback = function(ev)
+    vim.keymap.set('n', '<leader>h', function()
+      local file_path
+      local stripped_file
+      local is_impl = true
+      if vim.endswith(ev.file, '.c') then
+        stripped_file = ev.file:sub(1, -#'.c')
+      elseif vim.endswith(ev.file, '.cpp') then
+        stripped_file = ev.file:sub(1, -#'.cpp')
+      elseif vim.endswith(ev.file, '.h') then
+        stripped_file = ev.file:sub(1, -#'.h')
+        is_impl = false
+      elseif vim.endswith(ev.file, '.hpp') then
+        stripped_file = ev.file:sub(1, -#'.hpp')
+        is_impl = false
+      end
+
+      if is_impl then
+        if file_exists(stripped_file .. 'h') then
+          file_path = stripped_file .. 'h'
+        elseif file_exists(stripped_file .. 'hpp') then
+          file_path = stripped_file .. 'hpp'
+        else
+          print 'No corresponding h/hpp file found'
+          return
+        end
+      else
+        if file_exists(stripped_file .. 'c') then
+          file_path = stripped_file .. 'c'
+        elseif file_exists(stripped_file .. 'cpp') then
+          file_path = stripped_file .. 'cpp'
+        else
+          print 'No corresponding c/cpp file found'
+          return
+        end
+      end
+
+      vim.cmd.e(file_path)
+    end, { buffer = true, desc = 'Toggle H/HPP and C/CPP file' })
+  end,
+})
