@@ -1,3 +1,5 @@
+local file_exists = require('util').file_exists
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
@@ -17,15 +19,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
     vim.o.shiftwidth = 2
   end,
 })
-
-local function file_exists(name)
-  local f = io.open(name, 'r')
-  if f ~= nil then
-    io.close(f)
-    return true
-  end
-  return false
-end
 
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = { '*.c', '*.cpp', '*.h', '*.hpp' },

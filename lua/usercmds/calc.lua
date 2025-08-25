@@ -1,3 +1,5 @@
+local dump = require('util').dump
+
 local operators = {
   [','] = { 1, 2 },
   ['+'] = { 3, 4 },
@@ -32,24 +34,6 @@ local functions = {
   ['logn'] = {fun = math.log, nargs = 2},
   ['abs'] = {fun = math.abs, nargs = 1},
 }
-
-local function dump(o)
-  if type(o) == 'table' then
-    if next(o) == nil then
-      return '{ }'
-    end
-
-    local s = '{ '
-    for k, v in pairs(o) do
-      s = s .. '[' .. dump(k) .. ']=' .. dump(v) .. ', '
-    end
-    return s:sub(0, #s - 2) .. ' }'
-  elseif type(o) == 'string' then
-    return "'" .. o .. "'"
-  else
-    return tostring(o)
-  end
-end
 
 local h2b = {
 ['0']='0000', ['1']='0001', ['2']='0010', ['3']='0011',
