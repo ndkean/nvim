@@ -35,40 +35,7 @@ vim.keymap.set('n', '<A-j>', '<C-E>j', { desc = 'Scroll down one line' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
 
--- TODO: less scuffed compile:
--- - [ ] don't try to compile with no command
--- - [ ] turn this into a user command
--- - [ ] generate a location list (with trouble.nvim?) for when comp. fails
--- - [ ] only print one line at a time
--- - [ ] print compilation started... -> compilation successful/failed
--- - [ ] detect warns/errors
-vim.keymap.set('n', '<C-c>', function()
-  vim.ui.input({ prompt = 'Compile command: ', default = vim.g.Compile_command }, function(input)
-    if not input then
-      return
-    end
-
-    vim.g.Compile_command = input
-
-    local cmd = vim.split(vim.g.Compile_command, ' ')
-    vim.system(cmd, { text = true }, function(out)
-      local msg = ''
-      if out.stderr ~= '' then
-        msg = msg .. out.stderr .. '\n'
-      end
-
-      if out.stdout ~= '' then
-        msg = msg .. out.stdout .. '\n'
-      end
-
-      if out.code == 0 then
-        print(msg .. 'Compilation successful')
-      else
-        print(msg .. 'Compilation failed')
-      end
-    end)
-  end)
-end, { desc = '[C]ompile' })
+vim.keymap.set('n', '<C-c>', vim.cmd.Compile, { desc = '[C]ompile' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
