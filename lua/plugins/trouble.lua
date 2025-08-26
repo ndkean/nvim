@@ -1,7 +1,12 @@
 return {
   'folke/trouble.nvim',
-  opts = {}, -- for default options, refer to the configuration section for custom setup.
+  config = function()
+    require('trouble').setup {}
+    require('trouble.sources').register('compile', require 'usercmds.compile.trouble_source')
+  end,
+  opts = {},
   cmd = 'Trouble',
+  lazy = false,
   keys = {
     {
       '<leader>xx',
