@@ -1,6 +1,7 @@
 -- TODO: less scuffed compile:
--- - [ ] properly parse the commands (dont split spaces in quotes)
 -- - [ ] let user stop compilation
+-- - [ ] properly parse the commands (dont split spaces in quotes)
+-- - [ ] do something with stdout when compilation succeeds.. e.g. display it in a read only buffer
 -- - [ ] odin error parser
 -- - [ ] make it a plugin so i can use trouble as a dep
 -- - [ ] use the builtin jumplist if trouble not available
