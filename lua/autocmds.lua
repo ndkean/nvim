@@ -11,14 +11,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = '*.lua',
-  callback = function()
-    vim.o.expandtab = true
-    vim.o.tabstop = 2
-    vim.o.shiftwidth = 2
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   pattern = '*.lua',
+--   callback = function()
+--     vim.o.expandtab = true
+--     vim.o.tabstop = 2
+--     vim.o.shiftwidth = 2
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = { '*.c', '*.cpp', '*.h', '*.hpp' },
@@ -28,14 +28,14 @@ vim.api.nvim_create_autocmd('BufEnter', {
       local stripped_file
       local is_impl = true
       if vim.endswith(ev.file, '.c') then
-        stripped_file = ev.file:sub(1, -#'.c')
+        stripped_file = ev.file:sub(1, - #'.c')
       elseif vim.endswith(ev.file, '.cpp') then
-        stripped_file = ev.file:sub(1, -#'.cpp')
+        stripped_file = ev.file:sub(1, - #'.cpp')
       elseif vim.endswith(ev.file, '.h') then
-        stripped_file = ev.file:sub(1, -#'.h')
+        stripped_file = ev.file:sub(1, - #'.h')
         is_impl = false
       elseif vim.endswith(ev.file, '.hpp') then
-        stripped_file = ev.file:sub(1, -#'.hpp')
+        stripped_file = ev.file:sub(1, - #'.hpp')
         is_impl = false
       end
 
