@@ -71,6 +71,6 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 
 vim.o.cindent = true
-vim.o.cinoptions = '=0{-s'
+vim.o.cinoptions = '=0{-sl1'
 
 vim.o.sessionoptions = 'globals,blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
