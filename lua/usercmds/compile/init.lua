@@ -66,8 +66,28 @@ local function get_compiler_errors_clang(line)
     }
 end
 
+local function get_compiler_errors_odin(line)
+    local path, line_no, col, severity, msg = string.match(line, '^(.-)%((%d+):(%d+)%) ([%a%s]+): (.-)$')
+    if path == nil then
+        return nil
+    end
+
+    severity = string.upper(severity)
+    if severity == 'SYNTAX ERROR' then
+        severity = 'ERROR'
+    end
+
+    return {
+        path = path,
+        pos = { line_no, col - 1 },
+        severity = vim.diagnostic.severity[severity],
+        message = msg,
+    }
+end
+
 local OUTPUT_PARSERS = {
     get_compiler_errors_clang,
+    get_compiler_errors_odin,
 }
 
 local function comp_fail(stderr)
