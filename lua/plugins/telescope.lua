@@ -54,7 +54,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
         vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
         vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing buffers' })
-        vim.keymap.set('n', '<leader>sm', builtin.man_pages, { desc = '[S]earch man pages' })
+        vim.keymap.set('n', '<leader>sm', function() builtin.man_pages({sections={"ALL"}}) end, { desc = '[S]earch man pages' })
 
         -- Slightly advanced example of overriding default behavior and theme
         vim.keymap.set('n', '<leader>/', function()
