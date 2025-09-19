@@ -56,6 +56,8 @@ local function get_compiler_errors_clang(line)
     severity = string.upper(severity)
     if severity == 'NOTE' then
         severity = 'HINT'
+    elseif severity == 'WARNING' then
+        severity = 'WARN'
     end
 
     return {
