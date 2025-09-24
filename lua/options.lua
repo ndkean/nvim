@@ -74,3 +74,5 @@ vim.o.cindent = true
 vim.o.cinoptions = '=0{-sl1'
 
 vim.o.sessionoptions = 'globals,blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
+vim.o.swapfile = false
