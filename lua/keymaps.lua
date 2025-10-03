@@ -42,3 +42,5 @@ vim.keymap.set('n', '<C-c>', vim.cmd.Compile, { desc = '[C]ompile' })
 -- vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
 -- vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
 -- vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
+
+vim.keymap.set("n", "<leader>bs", function() vim.cmd("enew") vim.bo.buftype, vim.bo.bufhidden, vim.bo.swapfile = "nofile", "hide", false end, { desc = "Open a [s]cratch buffer" })
