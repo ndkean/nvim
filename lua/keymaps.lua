@@ -50,6 +50,16 @@ local function open_buffer(cmd, opts)
     end
 end
 
+local function open_terminal_buffer(opts)
+    if opts.enter then
+        vim.cmd.terminal()
+    elseif opts.vertical then
+        vim.cmd("vnew term://fish")
+    else
+        vim.cmd("new term://fish")
+    end
+end
+
 local SCRATCH = { buftype = "nofile", bufhidden = "hide", swapfile = false }
 
 vim.keymap.set("n", "<leader>bs", function()
@@ -63,3 +73,7 @@ end, { desc = "Open a [s]cratch buffer"})
 vim.keymap.set("n", "<leader>bhs", function()
     open_buffer("new", SCRATCH)
 end, { desc = "Open a [s]cratch buffer"})
+
+vim.keymap.set("n", "<leader>bt",  function() open_terminal_buffer({ enter = true })    end, { desc = "Open a [t]erminal buffer" })
+vim.keymap.set("n", "<leader>bvt", function() open_terminal_buffer({ vertical = true }) end, { desc = "Open a [t]erminal buffer" })
+vim.keymap.set("n", "<leader>bht", function() open_terminal_buffer({ })                 end, { desc = "Open a [t]erminal buffer" })
