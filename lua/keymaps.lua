@@ -43,4 +43,23 @@ vim.keymap.set('n', '<C-c>', vim.cmd.Compile, { desc = '[C]ompile' })
 -- vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
 -- vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
 
-vim.keymap.set("n", "<leader>bs", function() vim.cmd("enew") vim.bo.buftype, vim.bo.bufhidden, vim.bo.swapfile = "nofile", "hide", false end, { desc = "Open a [s]cratch buffer" })
+local function open_buffer(cmd, opts)
+    vim.cmd(cmd)
+    for k, v in pairs(opts) do
+        vim.bo[k] = v
+    end
+end
+
+local SCRATCH = { buftype = "nofile", bufhidden = "hide", swapfile = false }
+
+vim.keymap.set("n", "<leader>bs", function()
+    open_buffer("enew", SCRATCH)
+end, { desc = "Open a [s]cratch buffer"})
+
+vim.keymap.set("n", "<leader>bvs", function()
+    open_buffer("vnew", SCRATCH)
+end, { desc = "Open a [s]cratch buffer"})
+
+vim.keymap.set("n", "<leader>bhs", function()
+    open_buffer("new", SCRATCH)
+end, { desc = "Open a [s]cratch buffer"})
