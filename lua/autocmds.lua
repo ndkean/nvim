@@ -63,3 +63,10 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end, { buffer = true, desc = 'Toggle H/HPP and C/CPP file' })
   end,
 })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = '*.templ',
+    callback = function(_)
+        vim.o.commentstring = "// %s"
+    end
+})
