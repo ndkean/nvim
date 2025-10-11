@@ -25,7 +25,7 @@ return {
             }):find()
         end
 
-        -- vim.keymap.set("n", "<C-m>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        vim.keymap.set("n", "<C-m>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
         vim.keymap.set("n", "<leader>sp", function() toggle_telescope(harpoon:list()) end,
             { desc = "[S]earch Har[p]ooned Buffers" })
 
