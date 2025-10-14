@@ -92,7 +92,7 @@ local OUTPUT_PARSERS = {
     get_compiler_errors_odin,
 }
 
-local function comp_fail(stderr)
+local function comp_output(stdout, stderr)
     local errors = {}
     for _, line in ipairs(vim.split(stderr, '\n')) do
         for _, parser in ipairs(OUTPUT_PARSERS) do
@@ -106,6 +106,8 @@ local function comp_fail(stderr)
 
     if #errors > 0 then
         create_jumplist(errors)
+    else
+        require('trouble').close { source = 'compile' }
     end
 end
 
@@ -135,15 +137,13 @@ local function compile()
                 local time_diff = os.time() - start_time
                 local time_diff_string = ('(%ss)'):format(time_diff > 0 and time_diff or '<1')
                 print('Compilation successful ' .. time_diff_string)
-                vim.schedule(function()
-                    require('trouble').close { source = 'compile' }
-                end)
             else
                 print 'Compilation failed'
-                vim.schedule(function()
-                    comp_fail(out.stderr)
-                end)
             end
+
+            vim.schedule(function()
+                comp_output(out.stdout, out.stderr)
+            end)
         end)
 
         if type(ret) == 'string' then
