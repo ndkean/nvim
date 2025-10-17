@@ -11,15 +11,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- vim.api.nvim_create_autocmd('BufEnter', {
---   pattern = '*.lua',
---   callback = function()
---     vim.o.expandtab = true
---     vim.o.tabstop = 2
---     vim.o.shiftwidth = 2
---   end,
--- })
-
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = { '*.c', '*.cpp', '*.h', '*.hpp' },
   callback = function(ev)
@@ -68,5 +59,20 @@ vim.api.nvim_create_autocmd('BufEnter', {
     pattern = '*.templ',
     callback = function(_)
         vim.o.commentstring = "// %s"
+    end
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = {'*.wiki', '*.md'},
+    callback = function(_)
+        vim.o.colorcolumn = '120'
+        vim.o.textwidth = 120
+    end
+})
+
+vim.api.nvim_create_autocmd('BufLeave', {
+    pattern = {'*.wiki', '*.md'},
+    callback = function(_)
+        vim.o.colorcolumn = ''
     end
 })
