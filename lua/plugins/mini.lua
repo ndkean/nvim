@@ -33,6 +33,9 @@ local function section_harpoon(start_index)
     local s = ""
     for i = start_index, len do
         local item = harpoon:list():get(i)
+        if item == nil then
+            goto continue
+        end
 
         if buf_is_current(item.value) then
             return s, i
@@ -44,6 +47,7 @@ local function section_harpoon(start_index)
         end
 
         s = s .. spaces .. harpoon_formatted_item(i, item)
+        ::continue::
     end
 
     return s, len + 1
