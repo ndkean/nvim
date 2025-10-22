@@ -29,11 +29,9 @@ return {
         vim.keymap.set("n", "<leader>sp", function() toggle_telescope(harpoon:list()) end,
             { desc = "[S]earch Har[p]ooned Buffers" })
 
-        vim.keymap.set("n", "<M-1>", function() harpoon:list():select(1) end)
-        vim.keymap.set("n", "<M-2>", function() harpoon:list():select(2) end)
-        vim.keymap.set("n", "<M-3>", function() harpoon:list():select(3) end)
-        vim.keymap.set("n", "<M-4>", function() harpoon:list():select(4) end)
-        vim.keymap.set("n", "<M-5>", function() harpoon:list():select(5) end)
+        for i = 1, 9 do
+            vim.keymap.set("n", ("<M-%d>"):format(i), function() harpoon:list():select(i) end)
+        end
 
         -- Toggle previous & next buffers stored within Harpoon list
         vim.keymap.set("n", "<M-n>", function() harpoon:list():prev() end)
