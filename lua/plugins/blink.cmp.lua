@@ -56,7 +56,8 @@ return { -- Autocompletion
       -- <c-k>: Toggle signature help
       --
       -- See :h blink-cmp-config-keymap for defining your own keymap
-      preset = 'default',
+      preset = 'none',
+      ['<C-x>'] = { 'show' },
       ['<C-a>'] = { 'select_and_accept' },
       ['<C-j>'] = { 'select_next' },
       ['<C-k>'] = { 'select_prev' },
