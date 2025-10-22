@@ -79,3 +79,5 @@ end, { desc = "Open a [s]cratch buffer"})
 vim.keymap.set("n", "<leader>bt",  function() open_terminal_buffer({ enter = true })    end, { desc = "Open a [t]erminal buffer" })
 vim.keymap.set("n", "<leader>bvt", function() open_terminal_buffer({ vertical = true }) end, { desc = "Open a [t]erminal buffer" })
 vim.keymap.set("n", "<leader>bht", function() open_terminal_buffer({ })                 end, { desc = "Open a [t]erminal buffer" })
+
+vim.keymap.set({"n", "v"}, "<leader>r", ":ReplaceWord<CR>", { desc = "Replace word" })
