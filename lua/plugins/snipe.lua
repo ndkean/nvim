@@ -16,6 +16,5 @@ return {
     hints = {
       dictionary = '123456789',
     },
-    sort = 'last',
   },
 }
