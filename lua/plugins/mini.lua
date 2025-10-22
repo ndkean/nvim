@@ -53,6 +53,14 @@ local function section_harpoon(start_index)
     return s, len + 1
 end
 
+local function custom_filename()
+    if vim.bo.buftype == 'terminal' then
+        return '%t'
+    else
+        return vim.fs.basename(vim.api.nvim_buf_get_name(0)) .. '%m%r'
+    end
+end
+
 return { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -80,7 +88,7 @@ return { -- Collection of various small independent plugins/modules
             content = {
                 active = function()
                     local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-                    local filename      = MiniStatusline.section_filename({ trunc_width = 2000,  })
+                    local filename      = custom_filename()
                     local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
                     local location      = MiniStatusline.section_location({ trunc_width = 75 })
                     local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
