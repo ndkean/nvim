@@ -9,13 +9,14 @@ vim.api.nvim_create_user_command('ReplaceWord', function(_)
         range = "'<,'>"
     end
 
-    vim.ui.input({ prompt = ("Replace `%s` with what: "):format(word) }, function(input)
+    vim.ui.input({ prompt = ("Replace with what: "), default = word }, function(input)
         if not input then
             return
         end
 
-        local what = input
-
-        vim.cmd(("%ss/%s/%s/gc"):format(range, search_arg, what))
+        vim.cmd(("%ss/%s/%s/gc"):format(range, search_arg, input))
     end)
 end, { nargs = 0 })
+
+-- local test = 123
+-- local foo = test + 5
